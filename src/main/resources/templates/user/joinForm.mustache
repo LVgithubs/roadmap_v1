@@ -1,0 +1,51 @@
+{{>/layout/main-header}}
+
+<div class="container">
+    <div class="my_auth_box">
+        <div class="my_auth_form_box">
+            <div class="my_error_box my_hidden">
+
+            </div>
+            <form action="/join" method="post" onsubmit="return validation()">
+                <input id="username" class="my_auth_form_box_input" type="text" name="username" placeholder="유저네임"
+                    maxlength="20" required />
+                <input id="password" class="my_auth_form_box_input" type="password" name="password" placeholder="비밀번호"
+                    maxlength="20" required />
+                <input id="same-password" class="my_auth_form_box_input" type="password" name="" placeholder="비밀번호 확인"
+                    maxlength="20" required />
+                    <div class="d-flex justify-content-end">
+                    <button type="button" class="my_secondary_btn" onclick="goPopup()" >주소 검색</button>
+                    </div>
+                <input id="address" class="my_auth_form_box_input" type="text" name="address" placeholder="주소"
+                    maxlength="20" required readonly />
+                <button type="submit" class="my_secondary_btn">회원가입</button>
+            </form>
+            <div class="my_auth_form_box_link">
+                <div><a href="/login-form">로그인</a></div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+<script src="/js/user/joinForm.js"></script>
+<script>
+function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	var pop = window.open("join/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+
+function jusoCallBack(roadFullAddr){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+    var addressEl = document.querySelector("#address");	
+    addressEl.value=roadFullAddr;
+    //document.form.roadFullAddr.value = roadFullAddr;
+}
+
+</script>
+{{>/layout/footer}}
