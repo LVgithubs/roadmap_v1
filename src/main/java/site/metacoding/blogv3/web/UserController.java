@@ -11,12 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.service.UserService;
 import site.metacoding.blogv3.util.UtilValid;
+import site.metacoding.blogv3.web.dto.Store;
 import site.metacoding.blogv3.web.dto.user.JoinReqDto;
 
 @RequiredArgsConstructor
@@ -41,9 +43,14 @@ public class UserController {
         return "/user/jusoPopup";
     }
 
+    @GetMapping("/juso/check")
+    public @ResponseBody String check() {
+        return Store.roadFullAddr;
+    }
+
     @PostMapping("join/jusoPopup")
-    public String addressValue() {
-        return null;
+    public void addressValue(String roadFullAddr) {
+        Store.roadFullAddr = roadFullAddr;
     }// 값을 못넘기고 있어요 ㅠ.....
 
     @GetMapping("/s/user/{id}/update-form")
